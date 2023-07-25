@@ -1,0 +1,85 @@
+<odoo>
+<!--     <record id="estate_property_view" model="ir.ui.view">
+            <field name="name">Estate property view</field>
+            <field name="model">estate.property</field>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='name']" position='before'>
+ 
+                </xpath>
+            </field>
+        </record> -->
+    <menuitem id="Estate_menu_root" name="Real Estate">
+        <menuitem id="A_first_level_menu" name="Configuration">
+            <menuitem id="model_Estate_property" action="estate_property"/>
+        </menuitem>
+    </menuitem>
+
+    <record id="estate_property" model="ir.actions.act_window">
+            <field name="name">Estate property</field>
+            <field name="res_model">estate.property</field>
+            <field name="view_mode">tree,form</field>
+    </record>
+
+    <record id="estate_property_view" model="ir.ui.view">
+            <field name="name">Estate property view</field>
+            <field name="model">estate.property</field>
+            <field name="arch" type="xml">
+                <tree string="Property" class="estate_property" sample="1" decoration-info="garage == True" decoration-bf="garage == False">
+                    <field name="name" string="Name" readonly="1" decoration-bf="1"/>
+                    <field name="garage" readonly="1" optional="hide"/>
+                    <field name="postcode" readonly="1" optional="hide"/>
+                    <field name="expected_price" sum="Montant prevue" widget="monetary" optional="hide"/>
+                    <field name="selling_price" sum="prix de vente" widget="monetary" optional="hide"/>
+                    <field name="bedrooms" string="Nombre de chambres" optional="show"/>
+                </tree>
+            </field>
+    </record>
+<!--    <record id="estate_property_view" model="ir.ui.view">
+            <field name="name">Estate property view</field>
+            <field name="model">estate.property</field>
+            <field name="arch" type="xml">
+                <search string="recherche">
+                    <field name="name"/>
+                </search>
+               </field>
+    </record> -->
+<record id="estate_property_form" model="ir.ui.view">
+            <field name="name">Estate property view</field>
+            <field name="model">estate.property</field>
+            <field name="arch" type="xml">
+    <form string="Property">
+    <header>
+            <field name="state" widget="statusbar" />
+    </header>
+        <sheet>
+            <widget name="web_ribbon" title="Sent" attrs="{'invisible': [('state', '==', 'unavailable')]}"/>        
+            <group>
+                <group>
+                    <field name="active"/>
+                    <field name="name"/>
+                </group>
+                <group>
+                    <field name="postcode"/>
+                </group>
+                <notebook>
+                    <page string="Description">
+                        <field name="description"/>
+                    </page>
+                    <page string="Détail">
+                    <group>
+                    <group>
+                        <field name="bedrooms"/>
+                        <field name="expected_price"/>
+                    </group>   
+                    <group>
+                        <field name="selling_price"/>
+                    </group>   
+                    </group>                                      
+                    </page>                    
+                </notebook>
+            </group>
+        </sheet>   
+    </form>
+</field>
+</record>
+</odoo>
